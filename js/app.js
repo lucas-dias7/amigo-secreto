@@ -3,6 +3,12 @@ let amigos = [];
 function adicionar () {
     let amigo = document.getElementById('nome-amigo');
     let lista = document.getElementById('lista-amigos');
+    if (amigo.value == '') {
+        alert('Digite o nome do amigo');
+    } else {
+           if (amigos.includes(amigo.value)) {
+        alert('Essa pessoa já foi incluida');
+    } else {
     amigos.push(amigo.value);
     if (lista.textContent == '') {
         lista.textContent = amigo.value;
@@ -10,10 +16,15 @@ function adicionar () {
         lista.textContent = lista.textContent + ', ' + amigo.value;
     }
     amigo.value = '';
+    } 
+    }
 }
 
 function sortear() {
-    embaralha(amigos);
+    if (amigos.length < 4) {
+        alert('O número mínimo de participantes são 4.');
+    } else {
+            embaralha(amigos);
     let sorteio = document.getElementById('lista-sorteio');
     for (let i = 0; i < amigos.length - 1; i++) {
         if (i == amigos.length) {
@@ -22,6 +33,8 @@ function sortear() {
             sorteio.innerHTML = sorteio.innerHTML + amigos[i] + '-->' + amigos[i + 1] + '<br>';
         }
     }
+    }
+
 }
 
 function embaralha(lista) {
@@ -37,5 +50,7 @@ function embaralha(lista) {
 }
 
 function reiniciar() {
-    
+    document.getElementById('lista-sorteio').innerHTML = '';
+    document.getElementById('lista-amigos').textContent = '';
+    amigos = [];
 }
